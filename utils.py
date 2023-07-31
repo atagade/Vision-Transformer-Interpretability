@@ -1,3 +1,4 @@
+import os
 import torch
 import torch.nn as nn
 import math
@@ -80,9 +81,10 @@ def get_value_normed_attention(attention_pattern, value_activations):
 
 def plot_heatmaps(attention_pattern, show=False, save=True, save_dir='plots', layer='all', head='all', type='attention_pattern'):
    
+    if not os.path.exists(save_dir):
+        os.makedirs(save_dir)
+        
     patches = [f'P{i}' for i in range(197)]
-    layers = [f'L{i}' for i in range(12)]
-    heads = [f'H{i}' for i in range(12)]
 
     if layer == 'all':
         layer = [i for i in range(12)]
